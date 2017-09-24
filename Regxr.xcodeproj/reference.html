@@ -1,0 +1,251 @@
+<html>
+    <head>
+        <style type="text/css" media="screen">
+            body {
+                background: clear;
+                color: $(textColor);
+                margin: 30px 20px;
+                padding: 0;
+                margin-top: 12px;
+                font-family: "Helvetica Neue";
+                font-size: 13px;
+                line-height: 1.30em;
+            }
+        
+        h1, h2, h3, h4, h5 {
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            margin: 12px 0 0 0;
+            padding: 0;
+        }
+        
+        h3 {
+            font-size: 1.4em;
+            margin-top: 36px;
+        }
+        
+        h3:first-child {
+            margin-top: 12px;
+        }
+        
+        div.item {
+            margin: 8px 0;
+        }
+        
+        div.item > div.code {
+            width: 5em;
+            background: rgba(0, 0, 0, 0.15);
+            padding: 6px 0px;
+            border-radius: 3px;
+            display: table-cell;
+            text-align: center;
+            font-weight: 300;
+            font-family: "Monaco", "Menlo";
+            vertical-align: middle;
+            letter-spacing: 2px;
+        }
+        
+        .special {
+            color: $(specialCharacterColor);
+        }
+        
+        .metacharacter {
+            color: $(metacharacterColor);
+        }
+        
+        span.content {
+            color: $(plainTextColor);
+            letter-spacing: 0px;
+        }
+        
+        span.comment {
+            color: $(commentColor);
+        }
+        
+        div.item > div.title {
+            display: table-cell;
+            padding-left: 12px;
+            vertical-align: middle;
+        }
+        
+        div.item > div.example {
+            margin: 12px 0 20px 80px;
+            width: 300px;
+            padding: 8px 12px;
+            white-space: nowrap;
+        }
+        
+        a {
+            color: $(linkColor);
+            text-decoration: none;
+        }
+        a:hover {
+            color: $(hoverLinkColor);
+        }
+        </style>
+    </head>
+    <body>
+        <h3>Metacharacters</h3>
+        <p>
+        Matacharacters express sets of characters or special characters.
+        </p>
+        <div class="item">
+            <div class="code"><span class="special">.</span></div>
+            <div class="title">any character</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">^</span>
+            </div>
+            <div class="title">beginning of a line</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">$</span>
+            </div>
+            <div class="title">end of a line</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">\</span>
+            </div>
+            <div class="title">quotes special characters (<span class="special">* ? + [ ] ( ) { } ^ $ | \ . / </span>)</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\w</span>
+            </div>
+            <div class="title">word</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\t</span>
+            </div>
+            <div class="title">horizontal tabulation</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\n</span>
+            </div>
+            <div class="title">new line</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\d</span>
+            </div>
+            <div class="title">any digit</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\s</span>
+            </div>
+            <div class="title"> white space character (<span class="metacharacter">\t \n \f \r \p{Z}</span>)</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">[</span><span class="content">&hellip;</span><span class="metacharacter">]</span>
+            </div>
+            <div class="title">
+                match any character (or range of characters) inside the brackets. Range may be e.g. <span class="metacharacter">[a-z]</span>, <span class="metacharacter">[A-Z]</span>, <span class="metacharacter">[3&hellip;5]</span>, etc.
+            </div>
+        </div>
+        
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\D</span>
+            </div>
+            <div class="title">any character that is not a decimal digit</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\S</span>
+            </div>
+            <div class="title">non-white space character</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="metacharacter">\W</span>
+            </div>
+            <div class="title">non-word character</div>
+        </div>
+        
+        <h3>Operators</h3>
+        <p>
+        Operators allow to desribe how an expression (or subexpression) should
+        be matched.
+        </p>
+        <div class="item">
+            <div class="code">
+                <span class="special">(</span><span class="content">&hellip;</span><span class="special">)</span>
+            </div>
+            <div class="title">groups expression into subexpressions</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="content">A</span><span class="special">|</span><span class="content">B</span>
+            </div>
+            <div class="title">alternation. Matches A or B</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">^</span>
+            </div>
+            <div class="title">negation</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">*</span>
+            </div>
+            <div class="title">match 0 or more times</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">+</span>
+            </div>
+            <div class="title">match 1 or more times</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">?</span>
+            </div>
+            <div class="title">match zero or one times</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">{</span>n<span class="special">}</span>
+            </div>
+            <div class="title">match exactly n times</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">{</span>n<span class="special">,</span>m<span class="special">}</span>
+            </div>
+            <div class="title">match at least n time and not more than m</div>
+        </div>
+        
+        <h3>Non-capturing operators</h3>
+        <p>
+        These operators work by one simple rule. They are not captured in groups.
+        </p>
+        <div class="item">
+            <div class="code">
+                <span class="comment">(?#&hellip;)</span>
+            </div>
+            <div class="title">Comment</div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">(?:</span><span class="content">&hellip;</span><span class="special">)</span>
+            </div>
+            <div class="title">
+                Subexpression must occur but it's not captured in group.
+            </div>
+        </div>
+        <div class="item">
+            <div class="code">
+                <span class="special">(?!</span><span class="content">&hellip;</span><span class="special">)</span>
+            </div>
+            <div class="title">Makes sure that the subexpression does not occur at current position. It's useful to exclude part of expression.</div>
+        </div>
+    </body>
+</html>

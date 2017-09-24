@@ -14,6 +14,9 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	@IBOutlet var textOutput: NSTextView!
 	@IBOutlet weak var regexInput: NSTextField!
 	@IBOutlet weak var invalidLabel: NSTextField!
+	@IBOutlet weak var topHalf: NSVisualEffectView!
+	@IBOutlet weak var bottomHalf: NSVisualEffectView!
+	@IBOutlet weak var referenceButton: NSButton!
 	
 	@objc dynamic var textInput: String = "" {
 		didSet {
@@ -37,7 +40,7 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	}
 
 	override func viewDidLoad() {
-		super.viewDidLoad()		
+		super.viewDidLoad()
 		NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
 			self.keyDown(with: aEvent)
 			return aEvent
@@ -118,6 +121,16 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	override func keyDown(with event: NSEvent) {
 		let attr = setRegexHighlight(regex: regexInput.stringValue, text: textOutput.textStorage?.string, event: event)
 		setOutputHighlight(attr: attr)
+	}
+	
+	@IBAction func referenceButtonClicked(_ sender: NSButton) {
+		if let splitViewController = self.parent as? NSSplitViewController {
+			let splitViewItem = splitViewController.splitViewItems
+			
+			splitViewItem.last!.collapseBehavior = .preferResizingSplitViewWithFixedSiblings
+			
+			splitViewItem.last!.animator().isCollapsed = !splitViewItem.last!.isCollapsed
+		}
 	}
 
 	override var representedObject: Any? {
