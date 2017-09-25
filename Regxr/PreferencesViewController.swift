@@ -19,9 +19,11 @@ class PreferencesViewController: NSViewController {
         super.viewDidLoad()
 		
 		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
-		if (theme == "Light") {
+		
+		switch theme {
+		case "Light":
 			themeButton.selectedSegment = 0
-		} else {
+		default:
 			themeButton.selectedSegment = 1
 		}
 		
@@ -34,6 +36,7 @@ class PreferencesViewController: NSViewController {
 	@IBAction func themeChanged(_ sender: NSSegmentedControl) {
 		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
 		var chosenTheme = theme
+		
 		if (sender.selectedSegment == 0) {
 			// Light theme chosen
 			chosenTheme = "Light"
@@ -50,12 +53,12 @@ class PreferencesViewController: NSViewController {
 	}
 	
 	@IBAction func referenceManualChecked(_ sender: NSButton) {
+		var show : Bool
 		if (sender.state.rawValue == 0) {
-			let show = false
-			defaults.setValue(show, forKey: "showReference")
+			show = false
 		} else {
-			let show = true
-			defaults.setValue(show, forKey: "showReference")
+			show = true
 		}
+		defaults.setValue(show, forKey: "showReference")
 	}
 }

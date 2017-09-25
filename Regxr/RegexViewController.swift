@@ -13,31 +13,45 @@ let DEFAULT_SHOW_REFERENCE = true
 
 class RegexViewController: NSViewController, NSWindowDelegate {
 	
+	@IBOutlet var regexInput: NSTextView!
 	@IBOutlet var textOutput: NSTextView!
-	@IBOutlet weak var regexInput: NSTextField!
 	@IBOutlet weak var invalidLabel: NSTextField!
 	@IBOutlet weak var topHalf: NSVisualEffectView!
 	@IBOutlet weak var bottomHalf: NSVisualEffectView!
 	@IBOutlet weak var referenceButton: NSButton!
 	
 	let defaults = UserDefaults.standard
+	let highlighter = Regex()
 	
-	@objc dynamic var textInput: String = "" {
+	@objc dynamic var regexTextInput: String = "" {
 		didSet {
-			let attr = setRegexHighlight(regex: regexInput.stringValue, text: self.textInput, event: nil)
-			setOutputHighlight(attr: attr)
+			setRegexInputColor(notification: nil)
 		}
 	}
 	
-	// Needed because NSTextView only has an "Attributed String" binding
-	@objc private static let keyPathsForValuesAffectingAttributedTextInput: Set<String> = [
-		#keyPath(textInput)
-	]
+	@objc private var attributedRegexTextInput: NSAttributedString {
+		get { return NSAttributedString(string: self.regexTextInput) }
+		set { self.regexTextInput = newValue.string }
+	}
+	
+	@objc dynamic var textInput: String = "" {
+		didSet {
+			let attr = setRegexHighlight(regex: regexInput.textStorage?.string, text: self.textInput, event: nil)
+			setOutputHighlight(attr: attr)
+			setRegexInputColor(notification: nil)
+		}
+	}
 	
 	@objc private var attributedTextInput: NSAttributedString {
 		get { return NSAttributedString(string: self.textInput) }
 		set { self.textInput = newValue.string }
 	}
+	
+	// Needed because NSTextView only has an "Attributed String" binding
+	@objc private static let keyPathsForValuesAffectingAttributedTextInput: Set<String> = [
+		#keyPath(textInput),
+		#keyPath(regexTextInput)
+	]
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
@@ -54,6 +68,7 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 		}
 		
 		NotificationCenter.default.addObserver(self, selector: #selector(self.setThemeColor), name: NSNotification.Name(rawValue: "changeThemeNotification"), object: nil)
+		NotificationCenter.default.addObserver(self, selector: #selector(self.setRegexInputColor), name: NSNotification.Name(rawValue: "changeThemeNotification"), object: nil)
 	}
 
 	override func viewDidLoad() {
@@ -64,6 +79,17 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 		}
 
 		setThemeColor(notification: nil)
+	}
+	
+	// Set color for regex input when regex is syntax highlighted
+	@objc func setRegexInputColor(notification: Notification?) {
+		let theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		
+		if let theme = theme {
+			let highlightedText = highlighter.highlight(string: self.regexTextInput, theme: theme)
+			regexInput.textStorage?.mutableString.setString("")
+			regexInput.textStorage?.append(highlightedText)
+		}
 	}
 	
 	@objc func setThemeColor(notification: Notification?) {
@@ -82,6 +108,7 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 				regexInput.textColor = NSColor.white
 				textOutput.textColor = NSColor.white
 			}
+			regexInput.font = NSFont(name: "Monaco", size: 15)
 			textOutput.font = NSFont(name: "Monaco", size: 15)
 		}
 	}
@@ -139,7 +166,6 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 				foundMatches = matches(for: topBox, in: bottomBox)
 			}
 			
-			
 			let attribute = NSMutableAttributedString(string: bottomBox)
 			let attributeLength = attribute.string.characters.count
 			
@@ -178,7 +204,7 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	}
 	
 	override func keyDown(with event: NSEvent) {
-		let attr = setRegexHighlight(regex: regexInput.stringValue, text: textOutput.textStorage?.string, event: event)
+		let attr = setRegexHighlight(regex: regexInput.textStorage?.string, text: textOutput.textStorage?.string, event: event)
 		setOutputHighlight(attr: attr)
 	}
 	
@@ -187,7 +213,6 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 			let splitViewItem = splitViewController.splitViewItems
 			
 			splitViewItem.last!.collapseBehavior = .preferResizingSplitViewWithFixedSiblings
-			
 			splitViewItem.last!.animator().isCollapsed = !splitViewItem.last!.isCollapsed
 		}
 	}
@@ -197,7 +222,6 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 		
 		}
 	}
-
 
 }
 

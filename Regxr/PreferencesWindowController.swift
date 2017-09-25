@@ -17,26 +17,22 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
 		
 		let theme = defaults.string(forKey: "theme")
     
-		if let window = window {
-			if let theme = theme {
-				if (theme == "Light") {
-					window.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
-				} else {
-					window.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
-				}
-				window.titleVisibility = NSWindow.TitleVisibility.hidden;
-				window.titlebarAppearsTransparent = true;
-				window.styleMask.insert(.fullSizeContentView)
-				window.isOpaque = false
-				window.invalidateShadow()
-				window.center()
-				window.makeKeyAndOrderFront(nil)
+		if let window = window, let theme = theme {
+			if (theme == "Light") {
+				window.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
+			} else {
+				window.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
 			}
+			window.titleVisibility = NSWindow.TitleVisibility.hidden;
+			window.titlebarAppearsTransparent = true;
+			window.styleMask.insert(.fullSizeContentView)
+			window.isOpaque = false
+			window.invalidateShadow()
+			window.center()
+			window.makeKeyAndOrderFront(nil)
 		}
 		
 		NSApp.activate(ignoringOtherApps: true)
-		
     }	
 	
-
 }
