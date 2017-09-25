@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A110F90D1F78ADC700675ED7 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110F90B1F78ADC700675ED7 /* PreferencesViewController.swift */; };
+		A110F90E1F78ADC700675ED7 /* PreferencesWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A110F90C1F78ADC700675ED7 /* PreferencesWindowController.swift */; };
 		A11AC46B1F77C8A800094AE6 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11AC46A1F77C8A800094AE6 /* SidebarViewController.swift */; };
 		A13944021F77D30D0022A176 /* reference.html in Resources */ = {isa = PBXBuildFile; fileRef = A13944011F77D30D0022A176 /* reference.html */; };
 		A19C347D1F76182E00BA7FC3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19C347C1F76182E00BA7FC3 /* AppDelegate.swift */; };
@@ -17,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A110F90B1F78ADC700675ED7 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		A110F90C1F78ADC700675ED7 /* PreferencesWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesWindowController.swift; sourceTree = "<group>"; };
 		A11AC46A1F77C8A800094AE6 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
 		A13944011F77D30D0022A176 /* reference.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = reference.html; sourceTree = "<group>"; };
 		A19C34791F76182E00BA7FC3 /* Regxr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Regxr.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +69,8 @@
 				A19C34801F76182E00BA7FC3 /* Assets.xcassets */,
 				A19C34821F76182E00BA7FC3 /* Main.storyboard */,
 				A19C34851F76182E00BA7FC3 /* Info.plist */,
+				A110F90B1F78ADC700675ED7 /* PreferencesViewController.swift */,
+				A110F90C1F78ADC700675ED7 /* PreferencesWindowController.swift */,
 				A11AC46A1F77C8A800094AE6 /* SidebarViewController.swift */,
 			);
 			path = Regxr;
@@ -142,6 +148,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A110F90E1F78ADC700675ED7 /* PreferencesWindowController.swift in Sources */,
+				A110F90D1F78ADC700675ED7 /* PreferencesViewController.swift in Sources */,
 				A19C347F1F76182E00BA7FC3 /* RegexViewController.swift in Sources */,
 				A1B787301F77AA2700F6C5DF /* WindowController.swift in Sources */,
 				A19C347D1F76182E00BA7FC3 /* AppDelegate.swift in Sources */,

@@ -8,6 +8,75 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Window Controller-->
+        <scene sceneID="fYu-7M-BhW">
+            <objects>
+                <customObject id="QKw-P1-VKq" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <windowController id="vB8-KY-qZs" customClass="PreferencesWindowController" customModule="Regxr" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="Tv6-0c-wxo">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="320" y="395" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="2048" height="1257"/>
+                        <connections>
+                            <outlet property="delegate" destination="vB8-KY-qZs" id="KpO-e8-C40"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="Ahb-hq-v3J" kind="relationship" relationship="window.shadowedContentViewController" id="njj-PW-1My"/>
+                    </connections>
+                </windowController>
+            </objects>
+            <point key="canvasLocation" x="645" y="15"/>
+        </scene>
+        <!--Preferences View Controller-->
+        <scene sceneID="QKy-rw-LG0">
+            <objects>
+                <customObject id="izs-L3-J98" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <viewController id="Ahb-hq-v3J" customClass="PreferencesViewController" customModule="Regxr" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="JAP-S6-PQ5">
+                        <rect key="frame" x="0.0" y="0.0" width="300" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="91K-dV-CvU">
+                                <rect key="frame" x="52" y="221" width="197" height="24"/>
+                                <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="PYe-MD-rJg">
+                                    <font key="font" metaFont="system"/>
+                                    <segments>
+                                        <segment label="Light Theme"/>
+                                        <segment label="Dark Theme" selected="YES" tag="1"/>
+                                    </segments>
+                                </segmentedCell>
+                                <connections>
+                                    <action selector="themeChanged:" target="Ahb-hq-v3J" id="tpB-WJ-jGm"/>
+                                </connections>
+                            </segmentedControl>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="I1B-GO-tLN">
+                                <rect key="frame" x="35" y="184" width="230" height="18"/>
+                                <buttonCell key="cell" type="check" title="Show reference manual on startup" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Slq-OD-Z7b">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="referenceManualChecked:" target="Ahb-hq-v3J" id="JaF-n1-zpI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="I1B-GO-tLN" firstAttribute="top" secondItem="91K-dV-CvU" secondAttribute="bottom" constant="23" id="45w-vr-7RJ"/>
+                            <constraint firstItem="I1B-GO-tLN" firstAttribute="centerX" secondItem="91K-dV-CvU" secondAttribute="centerX" id="QQU-c3-eCt"/>
+                            <constraint firstItem="91K-dV-CvU" firstAttribute="top" secondItem="JAP-S6-PQ5" secondAttribute="top" constant="26" id="ZOY-sd-qCl"/>
+                            <constraint firstItem="91K-dV-CvU" firstAttribute="centerX" secondItem="JAP-S6-PQ5" secondAttribute="centerX" id="rTj-7A-NS0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="referencesManualCheckbox" destination="I1B-GO-tLN" id="jyk-is-sVI"/>
+                        <outlet property="themeButton" destination="91K-dV-CvU" id="tGh-U3-n2H"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1227" y="9"/>
+        </scene>
         <!--Application-->
         <scene sceneID="JPo-4y-FX3">
             <objects>
@@ -25,7 +94,11 @@
                                             </connections>
                                         </menuItem>
                                         <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
-                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW">
+                                            <connections>
+                                                <segue destination="vB8-KY-qZs" kind="show" id="ish-MT-SJz"/>
+                                            </connections>
+                                        </menuItem>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -764,6 +837,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundView" destination="5bb-Nu-UnZ" id="LZc-ei-EaD"/>
                         <outlet property="referenceView" destination="w7J-4E-kCC" id="oUC-2K-eUT"/>
                     </connections>
                 </viewController>
@@ -774,7 +848,7 @@
         <!--Regex View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="RegexViewController" customModule="Regxr" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="RegexViewController" id="XfG-lQ-9wD" customClass="RegexViewController" customModule="Regxr" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
@@ -791,9 +865,9 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField focusRingType="none" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="64o-qt-0JG">
-                                        <rect key="frame" x="40" y="29" width="220" height="93"/>
+                                        <rect key="frame" x="38" y="29" width="224" height="93"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="border" focusRingType="none" allowsEditingTextAttributes="YES" id="mIN-Vp-mhX">
+                                        <textFieldCell key="cell" lineBreakMode="charWrapping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" focusRingType="none" allowsEditingTextAttributes="YES" id="mIN-Vp-mhX">
                                             <font key="font" size="15" name="Monaco"/>
                                             <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>

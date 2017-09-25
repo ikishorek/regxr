@@ -7,7 +7,9 @@
 //
 
 import Cocoa
-import Foundation
+
+let DEFAULT_THEME = "Dark"
+let DEFAULT_SHOW_REFERENCE = true
 
 class RegexViewController: NSViewController, NSWindowDelegate {
 	
@@ -17,6 +19,8 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	@IBOutlet weak var topHalf: NSVisualEffectView!
 	@IBOutlet weak var bottomHalf: NSVisualEffectView!
 	@IBOutlet weak var referenceButton: NSButton!
+	
+	let defaults = UserDefaults.standard
 	
 	@objc dynamic var textInput: String = "" {
 		didSet {
@@ -37,6 +41,19 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	
 	override func viewWillAppear() {
 		super.viewWillAppear()
+		
+		if let splitViewController = self.parent as? NSSplitViewController {
+			let showReferenceOnStartup = defaults.bool(forKey: "showReference")			
+			let splitViewItem = splitViewController.splitViewItems
+
+			if (showReferenceOnStartup) {
+				splitViewItem.last!.isCollapsed = false
+			} else {
+				splitViewItem.last!.isCollapsed = true
+			}
+		}
+		
+		NotificationCenter.default.addObserver(self, selector: #selector(self.setThemeColor), name: NSNotification.Name(rawValue: "changeThemeNotification"), object: nil)
 	}
 
 	override func viewDidLoad() {
@@ -45,8 +62,28 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 			self.keyDown(with: aEvent)
 			return aEvent
 		}
-		textOutput.font = NSFont(name: "Monaco", size: 15)
-		textOutput.textColor = NSColor.white
+
+		setThemeColor(notification: nil)
+	}
+	
+	@objc func setThemeColor(notification: Notification?) {
+		let theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		if let theme = theme {
+			if (theme == "Light") {
+				self.view.window?.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
+				topHalf.material = .light
+				bottomHalf.material = .mediumLight
+				regexInput.textColor = NSColor.black
+				textOutput.textColor = NSColor.black
+			} else {
+				self.view.window?.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
+				topHalf.material = .dark
+				bottomHalf.material = .ultraDark
+				regexInput.textColor = NSColor.white
+				textOutput.textColor = NSColor.white
+			}
+			textOutput.font = NSFont(name: "Monaco", size: 15)
+		}
 	}
 	
 	func matches(for regex: String, in text: String) -> [NSTextCheckingResult] {
@@ -64,17 +101,31 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	}
 	
 	func setOutputHighlight(attr: NSMutableAttributedString) {
-		textOutput.textStorage?.mutableString.setString("")
-		textOutput.textStorage?.append(attr)
-		textOutput.font = NSFont(name: "Monaco", size: 15)
-		textOutput.textColor = NSColor.white
+		let theme = defaults.string(forKey: "theme")
+		
+		if let theme = theme {
+			if (theme == "Light") {
+				regexInput.textColor = NSColor.black
+				textOutput.textColor = NSColor.black
+				attr.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.black, range: NSRange(location: 0, length: attr.length))
+			} else {
+				regexInput.textColor = NSColor.white
+				textOutput.textColor = NSColor.white
+				attr.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.white, range: NSRange(location: 0, length: attr.length))
+			}
+			
+			textOutput.textStorage?.mutableString.setString("")
+			textOutput.textStorage?.append(attr)
+			textOutput.font = NSFont(name: "Monaco", size: 15)
+		}
 	}
 	
 	func setRegexHighlight(regex regexInput: String?, text textInput: String?, event: NSEvent?) -> NSMutableAttributedString {
 		let topBox = regexInput
 		let bottomBox = textInput
+		let theme = defaults.string(forKey: "theme")
 		
-		if let topBox = topBox, let bottomBox = bottomBox {
+		if let topBox = topBox, let bottomBox = bottomBox, let theme = theme {
 			var foundMatches : [NSTextCheckingResult] = []
 			// If backspace, drop backspace character from regex
 			// Otherwise get topBox regex and current key character
@@ -103,11 +154,19 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 				let matchLength = outputStr.count
 				
 				if (newColor) {
-					attribute.addAttribute(NSAttributedStringKey.backgroundColor, value: NSColor(red: 0.60, green: 0.26, blue: 0.77, alpha: 1), range: NSRange(location: range.location, length: matchLength))
+					if (theme == "Light") {
+						attribute.addAttribute(NSAttributedStringKey.backgroundColor, value: NSColor(red:0.86, green:0.58, blue:0.99, alpha:1.00), range: NSRange(location: range.location, length: matchLength))
+					} else {
+						attribute.addAttribute(NSAttributedStringKey.backgroundColor, value: NSColor(red: 0.60, green: 0.26, blue: 0.77, alpha: 1), range: NSRange(location: range.location, length: matchLength))
+					}
 					range = NSMakeRange(range.location + range.length, attributeLength - (range.location + range.length))
 					newColor = false
 				} else {
-					attribute.addAttribute(NSAttributedStringKey.backgroundColor, value: NSColor(red: 0.25, green: 0.51, blue: 0.77, alpha: 1), range: NSRange(location: range.location, length: matchLength))
+					if (theme == "Light") {
+						attribute.addAttribute(NSAttributedStringKey.backgroundColor, value: NSColor(red:0.59, green:0.87, blue:0.97, alpha:1.00), range: NSRange(location: range.location, length: matchLength))
+					} else {
+						attribute.addAttribute(NSAttributedStringKey.backgroundColor, value: NSColor(red: 0.25, green: 0.51, blue: 0.77, alpha: 1), range: NSRange(location: range.location, length: matchLength))
+					}
 					range = NSMakeRange(range.location + range.length, attributeLength - (range.location + range.length))
 					newColor = true
 				}
