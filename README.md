@@ -2,6 +2,8 @@
 
 Regxr is a minimal, lightweight and beautiful MacOS desktop application that allows for easy checking of regular expression pattern matching.
 
+It was made to be a free and open source alternative to [Expressions](http://www.apptorium.com/products/expressions)
+
 ### Features
 - Syntax highlighting
 - Dark and light modes
