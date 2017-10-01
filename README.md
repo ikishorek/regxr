@@ -12,6 +12,10 @@ It was made to be a free and open source alternative to [Expressions](http://www
 - Full screeen support
 - Reference manual
 
+### Download
+
+Visit [lukakerr.github.io](https://lukakerr.github.io/projects/regxr.html) to download
+
 I have also developed a [menubar application](https://github.com/lukakerr/regxr-menubar) that does the same thing, but lives in the menubar.
 
 <p align="center">
@@ -29,5 +33,3 @@ I have also developed a [menubar application](https://github.com/lukakerr/regxr-
 <p align="center">
   <img src="https://i.imgur.com/ystCQLQ.png" alt="regxr4">
 </p>
-
-Visit [lukakerr.github.io](https://lukakerr.github.io/projects/regxr.html) to download
