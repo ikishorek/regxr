@@ -8,7 +8,7 @@
 
 import Cocoa
 
-let DEFAULT_THEME = "Dark"
+let DEFAULT_THEME = "Light"
 let DEFAULT_SHOW_REFERENCE = true
 
 class RegexViewController: NSViewController, NSWindowDelegate {
@@ -56,8 +56,10 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	override func viewWillAppear() {
 		super.viewWillAppear()
 		
+		defaults.set(true, forKey: "showReference")
+		
 		if let splitViewController = self.parent as? NSSplitViewController {
-			let showReferenceOnStartup = defaults.bool(forKey: "showReference")			
+			let showReferenceOnStartup = defaults.bool(forKey: "showReference")
 			let splitViewItem = splitViewController.splitViewItems
 
 			if (showReferenceOnStartup) {
@@ -83,8 +85,10 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	
 	// Set color for regex input when regex is syntax highlighted
 	@objc func setRegexInputColor(notification: Notification?) {
-		let theme = notification?.object as? String ?? defaults.string(forKey: "theme")
-		
+		var theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		if theme == nil {
+			theme = DEFAULT_THEME
+		}
 		if let theme = theme {
 			let highlightedText = highlighter.highlight(string: self.regexTextInput, theme: theme)
 			regexInput.textStorage?.mutableString.setString("")
@@ -93,7 +97,10 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	}
 	
 	@objc func setThemeColor(notification: Notification?) {
-		let theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		var theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		if theme == nil {
+			theme = DEFAULT_THEME
+		}
 		if let theme = theme {
 			if (theme == "Light") {
 				self.view.window?.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
@@ -108,9 +115,9 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 				regexInput.textColor = NSColor.white
 				textOutput.textColor = NSColor.white
 			}
-			regexInput.font = NSFont(name: "Monaco", size: 15)
-			textOutput.font = NSFont(name: "Monaco", size: 15)
 		}
+		regexInput.font = NSFont(name: "Monaco", size: 15)
+		textOutput.font = NSFont(name: "Monaco", size: 15)
 	}
 	
 	func matches(for regex: String, in text: String) -> [NSTextCheckingResult] {
@@ -128,31 +135,29 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	}
 	
 	func setOutputHighlight(attr: NSMutableAttributedString) {
-		let theme = defaults.string(forKey: "theme")
+		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
 		
-		if let theme = theme {
-			if (theme == "Light") {
-				regexInput.textColor = NSColor.black
-				textOutput.textColor = NSColor.black
-				attr.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.black, range: NSRange(location: 0, length: attr.length))
-			} else {
-				regexInput.textColor = NSColor.white
-				textOutput.textColor = NSColor.white
-				attr.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.white, range: NSRange(location: 0, length: attr.length))
-			}
-			
-			textOutput.textStorage?.mutableString.setString("")
-			textOutput.textStorage?.append(attr)
-			textOutput.font = NSFont(name: "Monaco", size: 15)
+		if (theme == "Light") {
+			regexInput.textColor = NSColor.black
+			textOutput.textColor = NSColor.black
+			attr.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.black, range: NSRange(location: 0, length: attr.length))
+		} else {
+			regexInput.textColor = NSColor.white
+			textOutput.textColor = NSColor.white
+			attr.addAttribute(NSAttributedStringKey.foregroundColor, value: NSColor.white, range: NSRange(location: 0, length: attr.length))
 		}
+		
+		textOutput.textStorage?.mutableString.setString("")
+		textOutput.textStorage?.append(attr)
+		textOutput.font = NSFont(name: "Monaco", size: 15)
 	}
 	
 	func setRegexHighlight(regex regexInput: String?, text textInput: String?, event: NSEvent?) -> NSMutableAttributedString {
 		let topBox = regexInput
 		let bottomBox = textInput
-		let theme = defaults.string(forKey: "theme")
+		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
 		
-		if let topBox = topBox, let bottomBox = bottomBox, let theme = theme {
+		if let topBox = topBox, let bottomBox = bottomBox {
 			var foundMatches : [NSTextCheckingResult] = []
 			// If backspace, drop backspace character from regex
 			// Otherwise get topBox regex and current key character

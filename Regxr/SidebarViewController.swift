@@ -32,7 +32,10 @@ class SidebarViewController: NSViewController, NSWindowDelegate {
 	}
 	
 	@objc func setThemeColor(notification: Notification?) {
-		let theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		var theme = notification?.object as? String ?? defaults.string(forKey: "theme")
+		if theme == nil {
+			theme = DEFAULT_THEME
+		}
 		if let theme = theme {
 			switch theme {
 			case "Light":
@@ -56,7 +59,7 @@ class SidebarViewController: NSViewController, NSWindowDelegate {
 				contentToAppend = "<style>body{color:#CCC;}</style></body></html>"
 			}
 			
-			//Check if file exists
+			// Check if file exists
 			if let fileHandle = FileHandle(forWritingAtPath: filePath) {
 				fileHandle.seekToEndOfFile()
 				fileHandle.write(contentToAppend.data(using: String.Encoding.utf8)!)

@@ -15,9 +15,9 @@ class PreferencesWindowController: NSWindowController, NSWindowDelegate {
     override func windowDidLoad() {
         super.windowDidLoad()
 		
-		let theme = defaults.string(forKey: "theme")
+		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
     
-		if let window = window, let theme = theme {
+		if let window = window {
 			if (theme == "Light") {
 				window.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
 			} else {

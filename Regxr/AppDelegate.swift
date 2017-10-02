@@ -10,18 +10,26 @@ import Cocoa
 
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+	
+	let defaults = UserDefaults.standard
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
 		// Main window
 		let window = NSApplication.shared.windows.first!
+		
+		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
+		
+		if (theme == "Light") {
+			window.appearance = NSAppearance(named: NSAppearance.Name.vibrantLight)
+		} else {
+			window.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
+		}
 
 		// Title bar properties
-		window.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
 		window.titleVisibility = NSWindow.TitleVisibility.hidden;
 		window.titlebarAppearsTransparent = true;
 		window.styleMask.insert(.fullSizeContentView)
 		window.isOpaque = false
-		window.appearance = NSAppearance(named: NSAppearance.Name.vibrantDark)
 		window.invalidateShadow()
 	}
 

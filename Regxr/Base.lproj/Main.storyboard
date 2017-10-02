@@ -39,7 +39,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <segmentedControl verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="91K-dV-CvU">
-                                <rect key="frame" x="52" y="64" width="197" height="24"/>
+                                <rect key="frame" x="47" y="64" width="206" height="24"/>
                                 <segmentedCell key="cell" borderStyle="border" alignment="left" style="rounded" trackingMode="selectOne" id="PYe-MD-rJg">
                                     <font key="font" metaFont="system"/>
                                     <segments>
@@ -607,7 +607,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="220" height="173"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <textView drawsBackground="NO" importsGraphics="NO" verticallyResizable="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="8Nh-QF-tOh">
+                                                <textView drawsBackground="NO" importsGraphics="NO" verticallyResizable="YES" fieldEditor="YES" findStyle="panel" allowsCharacterPickerTouchBarItem="NO" allowsUndo="YES" textCompletion="NO" id="8Nh-QF-tOh">
                                                     <rect key="frame" x="0.0" y="0.0" width="220" height="173"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>

@@ -15,9 +15,11 @@ class WindowController: NSWindowController {
 	override func windowDidLoad() {
         super.windowDidLoad()
 		
-		let theme = defaults.string(forKey: "theme")
-		if let window = window, let theme = theme {
+		let theme = defaults.string(forKey: "theme") ?? DEFAULT_THEME
+		
+		if let window = window {
 			setWindowColor(theme: theme)
+			
 			window.titleVisibility = NSWindow.TitleVisibility.hidden;
 			window.titlebarAppearsTransparent = true;
 			window.styleMask.insert(.fullSizeContentView)
