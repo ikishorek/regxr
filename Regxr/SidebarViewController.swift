@@ -54,9 +54,9 @@ class SidebarViewController: NSViewController, NSWindowDelegate {
 			
 			switch theme {
 			case "Light":
-				contentToAppend = "<style>body{color:#444;}</style></body></html>"
+				contentToAppend = "<style>body{color:#444;}span.content{color:#444}</style></body></html>"
 			default:
-				contentToAppend = "<style>body{color:#CCC;}</style></body></html>"
+				contentToAppend = "<style>body{color:#CCC;}span.content{color:#CCC}</style></body></html>"
 			}
 			
 			// Check if file exists

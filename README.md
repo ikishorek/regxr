@@ -2,8 +2,6 @@
 
 Regxr is a minimal, lightweight and beautiful MacOS desktop application that allows for easy checking of regular expression pattern matching.
 
-It was made to be a free and open source alternative to [Expressions](http://www.apptorium.com/products/expressions)
-
 ### Features
 - Syntax highlighting
 - Dark and light modes
@@ -19,17 +17,17 @@ Visit [lukakerr.github.io](https://lukakerr.github.io/projects/regxr.html) to do
 I have also developed a [menubar application](https://github.com/lukakerr/regxr-menubar) that does the same thing, but lives in the menubar.
 
 <p align="center">
-  <img src="https://i.imgur.com/eIil6Dg.png" alt="regxr1">
+  <img src="https://i.imgur.com/ChQl872.png" alt="regxr1">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/HB6a5T5.png" alt="regxr2">
+  <img src="https://i.imgur.com/6SAvyif.png" alt="regxr2">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/E9Idwfj.png" alt="regxr3">
+  <img src="https://i.imgur.com/k7dXx0o.png" alt="regxr3">
 </p>
 
 <p align="center">
-  <img src="https://i.imgur.com/ystCQLQ.png" alt="regxr4">
+  <img src="https://i.imgur.com/NFErfQN.png" alt="regxr4">
 </p>
