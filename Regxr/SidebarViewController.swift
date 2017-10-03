@@ -19,7 +19,12 @@ class SidebarViewController: NSViewController, NSWindowDelegate {
 	override func viewWillAppear() {
 		super.viewWillAppear()
 		
-		NotificationCenter.default.addObserver(self, selector: #selector(self.setThemeColor), name: NSNotification.Name(rawValue: "changeThemeNotification"), object: nil)
+		NotificationCenter.default.addObserver(
+      self,
+      selector: #selector(self.setThemeColor),
+      name: NSNotification.Name(rawValue: "changeThemeNotification"),
+      object: nil
+    )
 	}
 	
 	override func viewDidLoad() {

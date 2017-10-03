@@ -47,7 +47,10 @@ class PreferencesViewController: NSViewController {
 		}
 		wc.setWindowColor(theme: chosenTheme)
 		
-		NotificationCenter.default.post(name: NSNotification.Name(rawValue: "changeThemeNotification"), object: chosenTheme)
+		NotificationCenter.default.post(
+      name: NSNotification.Name(rawValue: "changeThemeNotification"),
+      object: chosenTheme
+    )
 		
 		defaults.setValue(chosenTheme, forKey: "theme")
 	}
