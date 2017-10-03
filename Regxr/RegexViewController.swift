@@ -21,7 +21,7 @@ class RegexViewController: NSViewController, NSWindowDelegate {
   @IBOutlet weak var referenceButton: NSButton!
   
   let defaults = UserDefaults.standard
-  let highlighter = Regex()
+  let highlighter = RegexHighlighter()
   
   @objc dynamic var regexTextInput: String = "" {
     didSet {

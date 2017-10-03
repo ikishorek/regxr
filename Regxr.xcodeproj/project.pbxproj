@@ -16,7 +16,7 @@
 		A19C34841F76182E00BA7FC3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A19C34821F76182E00BA7FC3 /* Main.storyboard */; };
 		A1A133AD1F830FBD0072CB58 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1A133AC1F830FBD0072CB58 /* Assets.xcassets */; };
 		A1B787301F77AA2700F6C5DF /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B7872F1F77AA2700F6C5DF /* WindowController.swift */; };
-		A1FDFEEA1F78CEA300B2DABD /* Regex.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDFEE91F78CEA300B2DABD /* Regex.swift */; };
+		A1FDFEEA1F78CEA300B2DABD /* RegexHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1FDFEE91F78CEA300B2DABD /* RegexHighlighter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 		A19C34851F76182E00BA7FC3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1A133AC1F830FBD0072CB58 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1B7872F1F77AA2700F6C5DF /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		A1FDFEE91F78CEA300B2DABD /* Regex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Regex.swift; sourceTree = "<group>"; };
+		A1FDFEE91F78CEA300B2DABD /* RegexHighlighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegexHighlighter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 				A1B7872F1F77AA2700F6C5DF /* WindowController.swift */,
 				A19C347C1F76182E00BA7FC3 /* AppDelegate.swift */,
 				A19C347E1F76182E00BA7FC3 /* RegexViewController.swift */,
-				A1FDFEE91F78CEA300B2DABD /* Regex.swift */,
+				A1FDFEE91F78CEA300B2DABD /* RegexHighlighter.swift */,
 				A19C34821F76182E00BA7FC3 /* Main.storyboard */,
 				A19C34851F76182E00BA7FC3 /* Info.plist */,
 				A110F90B1F78ADC700675ED7 /* PreferencesViewController.swift */,
@@ -153,7 +153,7 @@
 			files = (
 				A110F90E1F78ADC700675ED7 /* PreferencesWindowController.swift in Sources */,
 				A110F90D1F78ADC700675ED7 /* PreferencesViewController.swift in Sources */,
-				A1FDFEEA1F78CEA300B2DABD /* Regex.swift in Sources */,
+				A1FDFEEA1F78CEA300B2DABD /* RegexHighlighter.swift in Sources */,
 				A19C347F1F76182E00BA7FC3 /* RegexViewController.swift in Sources */,
 				A1B787301F77AA2700F6C5DF /* WindowController.swift in Sources */,
 				A19C347D1F76182E00BA7FC3 /* AppDelegate.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class Regex {
+class RegexHighlighter {
   func highlight(string: String, theme: String) -> NSMutableAttributedString {
     let purpleFoundMatches = matches(
       for: "\\(|\\)|\\?|\\+|\\*|\\^|\\{|\\}|\\||\\.|\\^|\\$|\\\\",
