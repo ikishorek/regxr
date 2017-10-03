@@ -209,6 +209,23 @@ class RegexViewController: NSViewController, NSWindowDelegate {
 	}
 	
 	override func keyDown(with event: NSEvent) {
+		
+		// If command key and special letter pressed
+		// Return and let default action occur
+		switch event.modifierFlags.intersection(.deviceIndependentFlagsMask) {
+		case [.command] where event.characters == "x",
+		     [.command] where event.characters == "c",
+		     [.command] where event.characters == "v",
+		     [.command] where event.characters == "a":
+			return
+		default:
+			break
+		}
+		
+		if event.charactersIgnoringModifiers == String(Character(UnicodeScalar(NSDeleteCharacter)!)) {
+			return
+		}
+		
 		let attr = setRegexHighlight(regex: regexInput.textStorage?.string, text: textOutput.textStorage?.string, event: event)
 		setOutputHighlight(attr: attr)
 	}
