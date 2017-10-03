@@ -54,9 +54,27 @@ class SidebarViewController: NSViewController, NSWindowDelegate {
 			
 			switch theme {
 			case "Light":
-				contentToAppend = "<style>body{color:#444;}span.content{color:#444}</style></body></html>"
+				contentToAppend = """
+				<style>
+					body{color:#444;}
+					span.content{color:#444}
+					div.item:nth-child(odd) {background: rgba(0, 0, 0, 0.05);}
+					div.item:nth-child(even) {background: rgba(0, 0, 0, 0.025);}
+				</style>
+				</body>
+				</html>
+				"""
 			default:
-				contentToAppend = "<style>body{color:#CCC;}span.content{color:#CCC}</style></body></html>"
+				contentToAppend = """
+				<style>
+					body{color:#CCC;}
+					span.content{color:#CCC}
+					div.item:nth-child(odd){background: rgba(0, 0, 0, 0.1);}
+					div.item:nth-child(even){background: rgba(0, 0, 0, 0.15);}
+				</style>
+				</body>
+				</html>
+				"""
 			}
 			
 			// Check if file exists

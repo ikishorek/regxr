@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<style type="text/css" media="screen">
+		<style>
 			body {
 				background: transparent;
 				margin: 12px 0;
@@ -10,41 +11,28 @@
 			}
 		
 		h3 {
-			margin: 36px 20px 20px 20px;
-			font-size: 1.4em;
-			margin-top: 36px;
+			margin: 30px 20px 20px 20px;
+			font-size: 18px;
 			font-weight: 300;
 			letter-spacing: 0.05em;
-			padding: 0;
 		}
 		
 		h3:first-child {
-			margin-top: 20px;
+			margin-top: 15px;
 		}
 		
 		div.item {
 			padding: 8px 30px;
 		}
 		
-		div.item:nth-child(odd) {
-			background: rgba(0, 0, 0, 0.05);
-		}
-		
-		div.item:nth-child(even) {
-			background: rgba(0, 0, 0, 0.025);
-		}
-		
-		div.item > div.code {
-			width: 4em;
+		div.item > div.regex {
+			width: 5em;
 			font-size: 14px;
 			padding: 6px 10px;
-			border-radius: 3px;
 			display: table-cell;
 			text-align: left;
-			font-weight: 300;
 			font-family: "Monaco", "Menlo";
-			vertical-align: middle;
-			letter-spacing: 2px;
+			letter-spacing: 0.1em;
 		}
 		
 		.special {
@@ -55,192 +43,187 @@
 			color: #9A43C4;
 		}
 		
-		span.content {
-			letter-spacing: 0px;
-		}
-		
 		span.comment {
 			color: #777;
 		}
 		
-		div.item > div.title {
+		div.item > div.label {
 			display: table-cell;
 			padding-left: 12px;
-			vertical-align: middle;
 		}
 		</style>
 	</head>
 	<body>
 		<h3>Basics</h3>
 		<div class="item">
-			<div class="code"><span class="metacharacter">.</span></div>
-			<div class="title">Any character except a newline</div>
+			<div class="regex"><span class="metacharacter">.</span></div>
+			<div class="label">Any character except a newline</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="content">a</span>
 			</div>
-			<div class="title">The letter a</div>
+			<div class="label">The letter a</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="content">a<span class="metacharacter">|</span>b</span>
 			</div>
-			<div class="title">Either a or b</div>
+			<div class="label">Either a or b</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="content">a<span class="metacharacter">*</span></span>
 			</div>
-			<div class="title">0 or more a's</div>
+			<div class="label">0 or more a's</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="metacharacter">\</span>
 			</div>
-			<div class="title">Escapes a special character</div>
+			<div class="label">Escapes a special character</div>
 		</div>
 		
 		<h3>Characters</h3>
 		<div class="item">
-			<div class="code"><span class="special">\d</span></div>
-			<div class="title">One digit from 0-9</div>
+			<div class="regex"><span class="special">\d</span></div>
+			<div class="label">One digit from 0-9</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\w</span>
 			</div>
-			<div class="title">A word</div>
+			<div class="label">A word</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\s</span>
 			</div>
-			<div class="title">Whitespace character</div>
+			<div class="label">Whitespace character</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\D</span>
 			</div>
-			<div class="title">One non-digit</div>
+			<div class="label">One non-digit</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\S</span>
 			</div>
-			<div class="title">One non-whitespace</div>
+			<div class="label">One non-whitespace</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\W</span>
 			</div>
-			<div class="title">One non-word</div>
+			<div class="label">One non-word</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special"><span class="metacharacter">[</span>\b<span class="metacharacter">]</span></span>
 			</div>
-			<div class="title">Backspace</div>
+			<div class="label">Backspace</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="content"><span class="metacharacter">[</span>a-z<span class="metacharacter">]</span></span>
 			</div>
-			<div class="title">Any letter from a-z</div>
+			<div class="label">Any letter from a-z</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="content"><span class="metacharacter">[</span>A-Z<span class="metacharacter">]</span></span>
 			</div>
-			<div class="title">Any letter from A-Z</div>
+			<div class="label">Any letter from A-Z</div>
 		</div>
 		
 		<h3>Special Characters</h3>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\n</span>
 			</div>
-			<div class="title">Newline</div>
+			<div class="label">Newline</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\r</span>
 			</div>
-			<div class="title">Carriage return</div>
+			<div class="label">Carriage return</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\t</span>
 			</div>
-			<div class="title">Tab</div>
+			<div class="label">Tab</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\0</span>
 			</div>
-			<div class="title">Null character</div>
+			<div class="label">Null character</div>
 		</div>
 		
 		<h3>Assertions</h3>
 		<div class="item">
-			<div class="code">
-				<span class="special">^</span>
+			<div class="regex">
+				<span class="metacharacter">^</span>
 			</div>
-			<div class="title">Start of string</div>
+			<div class="label">Start of string</div>
 		</div>
 		<div class="item">
-			<div class="code">
-				<span class="special">$</span>
+			<div class="regex">
+				<span class="metacharacter">$</span>
 			</div>
-			<div class="title">End of string</div>
+			<div class="label">End of string</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\b</span>
 			</div>
-			<div class="title">Word boundary</div>
+			<div class="label">Word boundary</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">\B</span>
 			</div>
-			<div class="title">Non-word boundary</div>
+			<div class="label">Non-word boundary</div>
 		</div>
 		
 		<h3>Quantifiers</h3>
 		<div class="item">
-			<div class="code">
-				<span class="special">*</span>
+			<div class="regex">
+				<span class="metacharacter">*</span>
 			</div>
-			<div class="title">0 or more</div>
+			<div class="label">0 or more</div>
 		</div>
 		<div class="item">
-			<div class="code">
-				<span class="special">+</span>
+			<div class="regex">
+				<span class="metacharacter">+</span>
 			</div>
-			<div class="title">1 or more</div>
+			<div class="label">1 or more</div>
 		</div>
 		<div class="item">
-			<div class="code">
-				<span class="special">?</span>
+			<div class="regex">
+				<span class="metacharacter">?</span>
 			</div>
-			<div class="title">0 or 1</div>
+			<div class="label">0 or 1</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">{</span><span class="content">2</span><span class="special">}</span>
 			</div>
-			<div class="title">Exactly 2</div>
+			<div class="label">Exactly 2</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">{</span><span class="content">2, 5</span><span class="special">}</span>
 			</div>
-			<div class="title">Between 2 and 5</div>
+			<div class="label">Between 2 and 5</div>
 		</div>
 		<div class="item">
-			<div class="code">
+			<div class="regex">
 				<span class="special">{</span><span class="content">2,</span><span class="special">}</span>
 			</div>
-			<div class="title">2 or more</div>
+			<div class="label">2 or more</div>
 		</div>
