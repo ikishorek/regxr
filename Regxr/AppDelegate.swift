@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Minimal
+//  Regxr
 //
 //  Created by Luka Kerr on 23/9/17.
 //  Copyright © 2017 Luka Kerr. All rights reserved.
