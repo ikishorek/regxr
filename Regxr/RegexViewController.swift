@@ -68,7 +68,7 @@ class RegexViewController: NSViewController, NSWindowDelegate {
   override func viewWillAppear() {
     super.viewWillAppear()
     
-    defaults.set(true, forKey: "showReference")
+    defaults.register(defaults: ["showReference": true])
     
     if let splitViewController = self.parent as? NSSplitViewController {
       let showReferenceOnStartup = defaults.bool(forKey: "showReference")
@@ -98,9 +98,9 @@ class RegexViewController: NSViewController, NSWindowDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (aEvent) -> NSEvent? in
-      self.keyDown(with: aEvent)
-      return aEvent
+    NSEvent.addLocalMonitorForEvents(matching: .keyDown) { (event) -> NSEvent? in
+      self.keyDown(with: event)
+      return event
     }
     
     setThemeColor(notification: nil)
@@ -261,14 +261,10 @@ class RegexViewController: NSViewController, NSWindowDelegate {
   }
   
   override func keyDown(with event: NSEvent) {
-    
     // If command key and special letter pressed
     // Return and let default action occur
     switch event.modifierFlags.intersection(.deviceIndependentFlagsMask) {
-    case [.command] where event.characters == "x",
-         [.command] where event.characters == "c",
-         [.command] where event.characters == "v",
-         [.command] where event.characters == "a":
+    case [.command]:
       return
     default:
       break
@@ -293,12 +289,6 @@ class RegexViewController: NSViewController, NSWindowDelegate {
       
       splitViewItem.last!.collapseBehavior = .preferResizingSplitViewWithFixedSiblings
       splitViewItem.last!.animator().isCollapsed = !splitViewItem.last!.isCollapsed
-    }
-  }
-  
-  override var representedObject: Any? {
-    didSet {
-      
     }
   }
   
